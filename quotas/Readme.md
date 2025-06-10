@@ -45,5 +45,5 @@ gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT \
 gcloud iam service-accounts keys create ~/terraform-key.json \
   --iam-account=terraform-sa@$GOOGLE_CLOUD_PROJECT.iam.gserviceaccount.com
 
-export GOOGLE_APPLICATION_CREDENTIALS="~/terraform-key.json"
+export GOOGLE_APPLICATION_CREDENTIALS="/home/codespace/terraform-key.json"
 ```
