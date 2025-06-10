@@ -25,3 +25,25 @@ sudo apt update
 ```sh
 sudo apt-get install terraform
 ```
+
+## Create Service Account
+
+```sh
+GOOGLE_CLOUD_PROJECT=gcp-playground-1212
+gcloud iam service-accounts create terraform-sa \
+  --description="Service account for Terraform" \
+  --display-name="Terraform Service Account"
+
+gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT \
+  --member="serviceAccount:terraform-sa@$GOOGLE_CLOUD_PROJECT.iam.gserviceaccount.com" \
+  --role="roles/compute.instanceAdmin.v1"
+
+gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT \
+  --member="serviceAccount:terraform-sa@$GOOGLE_CLOUD_PROJECT.iam.gserviceaccount.com" \
+  --role="roles/iam.serviceAccountUser"
+
+gcloud iam service-accounts keys create ~/terraform-key.json \
+  --iam-account=terraform-sa@$GOOGLE_CLOUD_PROJECT.iam.gserviceaccount.com
+
+export GOOGLE_APPLICATION_CREDENTIALS="~/terraform-key.json"
+```
