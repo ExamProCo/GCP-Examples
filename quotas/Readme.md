@@ -29,7 +29,8 @@ sudo apt-get install terraform
 ## Create Service Account
 
 ```sh
-GOOGLE_CLOUD_PROJECT=gcp-playground-1212
+export GOOGLE_CLOUD_PROJECT=gcp-playground-1212
+
 gcloud iam service-accounts create terraform-sa \
   --description="Service account for Terraform" \
   --display-name="Terraform Service Account"
